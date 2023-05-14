@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/navItemMarcas"
+            android:title="Marcas"/>
+
+        <item
+            android:id="@+id/navItemColores"
+            android:title="Colores"/>
+
+        <item
+            android:id="@+id/navItemTipoAuto"
+            android:title="Tipo de Automovil"/>
+
+        <item
+            android:id="@+id/navItemAutomoviles"
+            android:title="Automoviles"/>
+
+        <item
+            android:id="@+id/navItemUsuarios"
+            android:title="Usuarios"/>
+
+        <item
+            android:id="@+id/navItemLogout"
+            android:title="Logout"/>
+    </group>
+</menu>
