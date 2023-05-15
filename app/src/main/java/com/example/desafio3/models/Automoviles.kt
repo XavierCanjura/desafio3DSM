@@ -124,4 +124,37 @@ class Automoviles (context: Context?) {
             generarContentValues(idauto, modelo, numerovin, numerochasis, numeromotor, numeroasientos, anio, capacidad, precio, uri, descripcion, idmarca, idtipoauto, idcolor)
         )
     }
+
+    // Funcion para actualizar automoviles
+    fun updateUsuario(
+        idauto: Int?,
+        modelo: String?,
+        numerovin: String?,
+        numerochasis: String?,
+        numeromotor: String?,
+        numeroasientos: Int?,
+        anio: Int?,
+        capacidad: Int?,
+        precio: Double?,
+        uri: String?,
+        descripcion: String?,
+        idmarca: Int?,
+        idtipoauto: Int?,
+        idcolor: Int?
+    ){
+        db!!.update(
+            Automoviles.TABLE_NAME_AUTOMOVILES,
+            generarContentValues(idauto, modelo, numerovin, numerochasis, numeromotor, numeroasientos, anio, capacidad, precio, uri, descripcion, idmarca, idtipoauto, idcolor),
+            "$COL_ID_AUTOMOVIL=?", arrayOf(idauto.toString())
+        )
+    }
+
+    //Funcion para eliminar automoviles
+    fun deleteAutomovil(idauto: Int?){
+        db!!.delete(
+            Automoviles.TABLE_NAME_AUTOMOVILES,
+            "$COL_ID_AUTOMOVIL=?",
+            arrayOf(idauto.toString())
+        )
+    }
 }

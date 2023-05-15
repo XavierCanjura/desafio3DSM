@@ -11,44 +11,57 @@
         android:orientation="vertical"
         android:padding="5dp">
 
-        <TextView
-            android:id="@+id/tvCardTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="Nombre" />
-
-        <TextView
-            android:id="@+id/tvDataName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="22dp"
-            android:paddingLeft="3dp"
-            android:text="Toyota"/>
-
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end">
+            >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tvCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="Nombre" />
+
+                <TextView
+                    android:id="@+id/tvDataName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:paddingLeft="3dp"
+                    android:text="Toyota"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="210dp"
+                >
             <Button
                 android:id="@+id/btnEdit"
-                android:layout_marginRight="15dp"
-                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:background="@drawable/baseline_edit_24"/>
 
             <Button
                 android:id="@+id/btnDelete"
-                android:layout_gravity="end"
                 android:layout_width="35dp"
+                android:layout_marginTop="10dp"
                 android:layout_height="35dp"
                 android:background="@drawable/baseline_delete_24"/>
-
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

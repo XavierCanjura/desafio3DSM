@@ -9,9 +9,31 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/inicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicio de sesión"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+    <TextView
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="20dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +49,8 @@
     <TextView
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="20dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,12 +64,15 @@
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnAcceder"
         android:layout_marginTop="20dp"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:text="Acceder" />
+        android:backgroundTint="@color/success"
+        android:text="Iniciar Sesión" />
 
     <Button
         android:id="@+id/btnRegistrarme"
