@@ -39,9 +39,13 @@ class AddAutomovilActivity : AppCompatActivity() {
     private var TipoAutomovil: TipoAutomovil? = null
     private var Colores: Colores? = null
 
+    private var idAuto: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_automovil)
+
+        this.idAuto = intent.getIntExtra("idauto", 0)
 
         spMarcas = findViewById(R.id.spMarca)
         etModelo = findViewById(R.id.etModelo)

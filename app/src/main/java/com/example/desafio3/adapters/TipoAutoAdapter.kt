@@ -5,7 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio3.R
 
-class TipoAutoAdapter(private var tipoAutoList: List<Any>): RecyclerView.Adapter<TipoAutoViewHolder>() {
+class TipoAutoAdapter(
+    private var tipoAutoList: List<Any>,
+    private var onClickListener: (ArrayList<String>) -> Unit
+    ): RecyclerView.Adapter<TipoAutoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TipoAutoViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -15,7 +18,7 @@ class TipoAutoAdapter(private var tipoAutoList: List<Any>): RecyclerView.Adapter
     override fun getItemCount(): Int = tipoAutoList.size
 
     override fun onBindViewHolder(holder: TipoAutoViewHolder, position: Int) {
-        val marca = tipoAutoList[position]
-        holder.render(marca)
+        val tipoAuto = tipoAutoList[position]
+        holder.render(tipoAuto as ArrayList<String>, onClickListener)
     }
 }

@@ -5,7 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio3.R
 
-class AutoMovilAdapter(private var autoList: List<Any>): RecyclerView.Adapter<AutoMovilViewHolder>() {
+class AutoMovilAdapter(
+    private var autoList: List<Any>,
+    private var onClickListener: (ArrayList<String>) -> Unit
+    ): RecyclerView.Adapter<AutoMovilViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AutoMovilViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -15,7 +18,7 @@ class AutoMovilAdapter(private var autoList: List<Any>): RecyclerView.Adapter<Au
     override fun getItemCount(): Int = autoList.size
 
     override fun onBindViewHolder(holder: AutoMovilViewHolder, position: Int) {
-        val marca = autoList[position]
-        holder.render(marca as ArrayList<String>)
+        val auto = autoList[position]
+        holder.render(auto as ArrayList<String>, onClickListener)
     }
 }

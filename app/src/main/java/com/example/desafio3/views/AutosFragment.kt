@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafio3.adapters.AutoMovilAdapter
@@ -22,7 +23,7 @@ class AutosFragment : Fragment() {
     private var _binding: FragmentBaseBinding? = null
     private val binding get() = _binding!!
 
-    private var list: ArrayList<Any>? = null
+    private var list: MutableList<Any> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,14 +52,13 @@ class AutosFragment : Fragment() {
         Automoviles = Automoviles(context)
         var cursor: Cursor? = Automoviles!!.getAllAutomoviles()
 
-        list = ArrayList()
-        var car = ArrayList<String>()
+        list.clear()
 
         var marca: Marcas = Marcas(context)
         if(cursor != null && cursor.count > 0){
             cursor.moveToFirst()
             do {
-                car.clear()
+                var car = ArrayList<String>()
                 car.add(marca.searchNombre(cursor.getString(1).toInt()).toString())
                 car.add(cursor.getString(2))
                 car.add(cursor.getString(3))
@@ -66,9 +66,32 @@ class AutosFragment : Fragment() {
             } while ( cursor.moveToNext() )
         }
 
-        AutoMovilAdapter = AutoMovilAdapter(list!!)
+        AutoMovilAdapter = AutoMovilAdapter(list!!){
+            onItemClick(it[0], it[1])
+        }
 
         binding.rvCardList.adapter = AutoMovilAdapter
+    }
+
+    private fun onItemClick(tipo: String, id: String) {
+        if(tipo == "Editar"){
+            editarAuto(id)
+        } else {
+            eliminarAuto(id)
+        }
+    }
+
+    private fun editarAuto(id: String){
+        val activity = Intent(context, AddMarcaActivity::class.java)
+        activity.putExtra("idauto",id.toInt())
+        startActivity(activity)
+    }
+
+    private fun eliminarAuto(id: String){
+        Automoviles = Automoviles(context)
+        Automoviles!!.deleteAutomovil(id.toInt())
+        Toast.makeText(context, "Auto eliminado", Toast.LENGTH_LONG).show()
+        initRecyclerView()
     }
 
 }

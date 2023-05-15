@@ -60,12 +60,8 @@ class MarcaFragment : Fragment() {
                 marcas.add(cursor.getString(0))
                 marcas.add(cursor.getString(1))
                 list.add(marcas)
-                Log.d("InfoList", list.toString())
             } while ( cursor.moveToNext() )
         }
-
-
-        //Log.d("InfoDB", list.toString())
 
         marcaAdapter = MarcaAdapter(list){
             onItemClick(it[0], it[1])
@@ -75,7 +71,6 @@ class MarcaFragment : Fragment() {
     }
 
     private fun onItemClick(tipo: String, id: String) {
-        Log.d("Data", "$tipo - $id")
         if(tipo == "Editar"){
             editMarca(id)
         } else {
@@ -93,5 +88,6 @@ class MarcaFragment : Fragment() {
         Marcas = Marcas(context)
         Marcas!!.deleteMarca(id.toInt())
         Toast.makeText(context, "Marca Eliminada", Toast.LENGTH_LONG).show()
+        initRecyclerView()
     }
 }
