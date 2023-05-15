@@ -27,10 +27,14 @@ class AddUsuarioActivity : AppCompatActivity() {
 
     private var Usuarios: Usuarios? = null
 
+    private var tipoCreacion: String = "login"
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_usuario)
+
+        tipoCreacion = intent.getStringExtra("tipo").toString()
 
         etNombres = findViewById(R.id.etNombres)
         etApellidos = findViewById(R.id.etApellidos)
@@ -49,9 +53,16 @@ class AddUsuarioActivity : AppCompatActivity() {
         btnAgregar.setOnClickListener { this.AddUsuario() }
 
         btnRegresar.setOnClickListener {
-            val activity = Intent(this, MainActivity::class.java)
-            startActivity(activity)
-            finish()
+            if(tipoCreacion == "signin"){
+                val activity = Intent(this, LoginActivity::class.java)
+                startActivity(activity)
+                finish()
+            } else {
+                val activity = Intent(this, MainActivity::class.java)
+                startActivity(activity)
+                finish()
+            }
+
         }
     }
 
@@ -70,9 +81,15 @@ class AddUsuarioActivity : AppCompatActivity() {
 
         Toast.makeText(this, "Se creo correctamente el usuario", Toast.LENGTH_LONG).show()
 
-        val activity = Intent(this, MainActivity::class.java)
-        startActivity(activity)
-        finish()
+        if(tipoCreacion == "signin"){
+            val activity = Intent(this, LoginActivity::class.java)
+            startActivity(activity)
+            finish()
+        } else {
+            val activity = Intent(this, MainActivity::class.java)
+            startActivity(activity)
+            finish()
+        }
     }
 
     fun setSpinnerTipoUsuario(){

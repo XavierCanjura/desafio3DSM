@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import com.example.desafio3.db.HelperDB
 
 class Usuarios (context: Context?) {
@@ -97,5 +98,27 @@ class Usuarios (context: Context?) {
             "$COL_ID_USUARIO=?",
             arrayOf(idusuario.toString())
         )
+    }
+
+    fun Login(usuario: String?, password: String?): Boolean{
+        val colPass = arrayOf(COL_PASSWORD)
+        var cursor: Cursor = db!!.query(
+            TABLE_NAME_USUARIOS,
+            colPass,
+            "$COL_USER=?", arrayOf(usuario.toString()), null, null, null
+        )
+
+        cursor.moveToFirst()
+
+        if(cursor.count == 0)
+        {
+            return false
+        }
+
+        if(cursor.getString(0).toString() != password){
+            return false
+        }
+
+        return true
     }
 }
