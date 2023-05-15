@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.example.desafio3.db.HelperDB
+import kotlin.contracts.Returns
 
 class Automoviles (context: Context?) {
     private var helper: HelperDB? = null
@@ -103,6 +104,16 @@ class Automoviles (context: Context?) {
         )
     }
 
+    fun getAutoByID(idauto: Int?): Cursor? {
+        val columns = arrayOf(COL_MODELO, COL_NUMERO_VIN, COL_NUMERO_CHASIS, COL_NUMERO_MOTOR, COL_NUMERO_CHASIS, COL_ANIO, COL_CAPACIDAD_ASIENTOS, COL_PRECIO, COL_DESCRIPCION, COL_ID_MARCA, COL_ID_TIPO_AUTOMOVIL, COL_ID_COLOR)
+
+        return db!!.query(
+            TABLE_NAME_AUTOMOVILES,
+            columns,
+            "$COL_ID_AUTOMOVIL=?", arrayOf(idauto.toString()), null, null, null, null
+        )
+    }
+
     // Funcion para guardar automoviles
     fun addAutomovil(idauto: Int?,
                      modelo: String?,
@@ -122,6 +133,37 @@ class Automoviles (context: Context?) {
             TABLE_NAME_AUTOMOVILES,
             null,
             generarContentValues(idauto, modelo, numerovin, numerochasis, numeromotor, numeroasientos, anio, capacidad, precio, uri, descripcion, idmarca, idtipoauto, idcolor)
+        )
+    }
+
+    //Funcion para modificar autos
+    fun updateAutomovil(idauto: Int?,
+                        modelo: String?,
+                        numerovin: String?,
+                        numerochasis: String?,
+                        numeromotor: String?,
+                        numeroasientos: Int?,
+                        anio: Int?,
+                        capacidad: Int?,
+                        precio: Double?,
+                        uri: String?,
+                        descripcion: String?,
+                        idmarca: Int?,
+                        idtipoauto: Int?,
+                        idcolor: Int?){
+        db!!.update(
+            TABLE_NAME_AUTOMOVILES,
+            generarContentValues(idauto, modelo, numerovin, numerochasis, numeromotor, numeroasientos, anio, capacidad, precio, uri, descripcion, idmarca, idtipoauto, idcolor),
+            "$COL_ID_AUTOMOVIL=?", arrayOf(idauto.toString())
+        )
+    }
+
+    //Funcion para eliminar autos
+    fun deleteAutomovil(idauto: Int?){
+        db!!.delete(
+            TABLE_NAME_AUTOMOVILES,
+            "$COL_ID_AUTOMOVIL=?",
+            arrayOf(idauto.toString())
         )
     }
 }

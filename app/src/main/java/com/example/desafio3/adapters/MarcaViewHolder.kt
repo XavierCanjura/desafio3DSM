@@ -20,6 +20,7 @@ class MarcaViewHolder(view: View): ViewHolder(view) {
             var info = ArrayList<String>()
             info.add("Eliminar")
             info.add(data[0])
-            onClickListener(info) }
+            onClickListener(info)
+        }
     }
 }

@@ -42,9 +42,9 @@ class AddMarcaActivity : AppCompatActivity() {
 
         btnAgregar.setOnClickListener {
             if(idMarca == 0){
-                this.AddMarca()
+                this.AgregarMarca()
             } else {
-                this.EditMarca()
+                this.EditarMarca()
             }
         }
 
@@ -55,7 +55,7 @@ class AddMarcaActivity : AppCompatActivity() {
         }
     }
 
-    fun AddMarca() {
+    fun AgregarMarca() {
         Marcas = Marcas(this)
         var nombreMarca = tvNombreMarca.text.toString()
 
@@ -68,7 +68,7 @@ class AddMarcaActivity : AppCompatActivity() {
         finish()
     }
 
-    fun EditMarca()
+    fun EditarMarca()
     {
         Marcas = Marcas(this)
         var nombreMarca = tvNombreMarca.text.toString()

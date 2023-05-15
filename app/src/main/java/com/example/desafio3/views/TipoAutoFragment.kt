@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafio3.adapters.MarcaAdapter
 import com.example.desafio3.adapters.TipoAutoAdapter
@@ -23,7 +24,7 @@ class TipoAutoFragment : Fragment() {
     private var _binding: FragmentBaseBinding? = null
     private val binding get() = _binding!!
 
-    private var list: ArrayList<Any>? = null
+    private var list: MutableList<Any> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,6 @@ class TipoAutoFragment : Fragment() {
             startActivity(activity)
         }
 
-
         initRecyclerView()
 
         return view
@@ -52,17 +52,43 @@ class TipoAutoFragment : Fragment() {
         TipoAutomovil = TipoAutomovil(context)
         var cursor: Cursor? = TipoAutomovil!!.getAllTipoAuto()
 
-        list = ArrayList()
+        list.clear()
         if(cursor != null && cursor.count > 0){
             cursor.moveToFirst()
             do {
-                list!!.add(cursor.getString(1))
+                val tipoAuto = ArrayList<String>()
+                tipoAuto.add(cursor.getString(0))
+                tipoAuto.add(cursor.getString(1))
+                list!!.add(tipoAuto)
             } while ( cursor.moveToNext() )
         }
 
-        tipoAutoAdapter = TipoAutoAdapter(list!!)
+        tipoAutoAdapter = TipoAutoAdapter(list!!){
+            onItemClick(it[0], it[1])
+        }
 
         binding.rvCardList.adapter = tipoAutoAdapter
+    }
+
+    private fun onItemClick(tipo: String, id: String) {
+        if(tipo == "Editar"){
+            editarTipoAuto(id)
+        } else {
+            eliminarTipoAutoMarca(id)
+        }
+    }
+
+    private fun editarTipoAuto(id: String){
+        val activity = Intent(context, AddTipoAutoActivity::class.java)
+        activity.putExtra("idtipoauto",id.toInt())
+        startActivity(activity)
+    }
+
+    private fun eliminarTipoAutoMarca(id: String){
+        TipoAutomovil = TipoAutomovil(context)
+        TipoAutomovil!!.deleteTipoAuto(id.toInt())
+        Toast.makeText(context, "Tipo de auto eliminado", Toast.LENGTH_LONG).show()
+        initRecyclerView()
     }
 
 }
